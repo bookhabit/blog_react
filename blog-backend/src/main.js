@@ -12,6 +12,7 @@ import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 
 import api from './api'; // api 폴더가져옴  라우트 지정되어 있는 디렉토리
+import createFakeData from './createFakeData'; // 가짜 데이터 불러옴
 
 // 비구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기 ( .env 파일에 있는 환경변수 가져오는 것)
 const { PORT, MONGO_URL } = process.env;
