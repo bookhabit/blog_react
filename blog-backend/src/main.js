@@ -10,9 +10,9 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
+import jwtMiddleware from './lib/jwtMiddleware';
 
 import api from './api'; // api 폴더가져옴  라우트 지정되어 있는 디렉토리
-import createFakeData from './createFakeData'; // 가짜 데이터 불러옴
 
 // 비구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기 ( .env 파일에 있는 환경변수 가져오는 것)
 const { PORT, MONGO_URL } = process.env;
@@ -32,8 +32,9 @@ const router = new Router();
 // 라우터 설정
 router.use('/api', api.routes()); // api 라우트 적용
 
-// 라우터 적용 전에 bodyParser 적용
+// 라우터 적용 전에 bodyParser 적용  , 미들웨어 적용
 app.use(bodyParser());
+app.use(jwtMiddleware);
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
