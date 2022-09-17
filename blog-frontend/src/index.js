@@ -5,11 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from '../node_modules/react-router-dom/index';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './modules';
 
-const store = createStore(rootReducer, composeWithDevTools());
+import { rootSaga } from './modules/index';
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
